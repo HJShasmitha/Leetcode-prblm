@@ -1,0 +1,7 @@
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+        int a = 0;
+        for(String b : operations) a += (44-b.charAt(1));
+        return a;
+    }
+}
