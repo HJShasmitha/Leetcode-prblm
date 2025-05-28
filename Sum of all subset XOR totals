@@ -1,0 +1,9 @@
+class Solution {
+    public int subsetXORSum(int[] nums) {
+        int final = 0;
+        for(int i : nums) {
+            final |= i;
+        }
+        return final * (1 << (nums.length - 1));
+    }
+}
