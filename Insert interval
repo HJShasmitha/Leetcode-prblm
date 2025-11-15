@@ -1,0 +1,31 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList<>();
+        
+        int i = 0;
+        int n = intervals.length;
+        
+        // Iterate over all the intervals, adding them to the result as needed
+        while (i < n) {
+            if (intervals[i][1] < newInterval[0]) {
+                // If the current interval ends before the new interval starts, add it
+                result.add(intervals[i]);
+            } else if (intervals[i][0] > newInterval[1]) {
+                // If the current interval starts after the new interval ends, add the new interval and restart the process
+                result.add(newInterval);
+                newInterval = intervals[i];  // Move newInterval forward
+            } else {
+                // Intervals overlap, merge them
+                newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+                newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            }
+            i++;
+        }
+        
+        // Add the last interval
+        result.add(newInterval);
+        
+        return result.toArray(new int[result.size()][]);
+
+    }
+}
